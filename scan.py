@@ -3,16 +3,18 @@ import time
 
 class DirectoryMonitor:
 	directory = ''
+	interval = 0
 	on_added = None
 	on_removed = None
 
-	def __init__(self, path_i):
+	def __init__(self, path_i, interval_i):
 		self.directory = path_i
+		self.interval = interval_i
 
 	def start(self):
 		before = os.listdir(self.directory)
 
-		time.sleep(5)
+		time.sleep(self.interval)
 
 		after = os.listdir(self.directory)
 
