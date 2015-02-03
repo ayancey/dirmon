@@ -1,29 +1,41 @@
 import os
 import time
 
-before = os.listdir('C:\Users\Alex\Downloads')
+class DirectoryMonitor:
+	directory = ''
+	on_added = None
+	on_removed = None
 
-for file in before:
-	print file
+	def __init__(self, path_i):
+		self.directory = path_i
 
-print '----------------'
-time.sleep(5)
+	def start(self):
+		before = os.listdir(self.directory)
 
-after = os.listdir('C:\Users\Alex\Downloads')
+		time.sleep(5)
 
-for file in before:
-	print file
+		after = os.listdir(self.directory)
 
-removed = list(set(before) - set(after))
+		for file in before:
+			pass
+			#`print file
 
-print 'REMOVED:'
-print '------------'
-for file in removed:
-	print file
+		removed = list(set(before) - set(after))
+		for file in removed:
+			self.on_removed(file)
 
-added = list(set(after) - set(before))
+		added = list(set(after) - set(before))
+		for file in added:
+			self.on_added(file)
 
-print 'ADDED:'
-print '------------'
-for file in added:
-	print file
+def ohman(thefile):
+	print 'Added: ' + thefile
+
+def ohman2(thefile):
+	print 'Removed: ' + thefile
+
+this = DirectoryMonitor('C:\Users\Alex\Downloads')
+this.on_added = ohman
+this.on_removed = ohman2
+this.start()
+
