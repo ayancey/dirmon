@@ -1,7 +1,6 @@
 import os
 import time
 
-
 class DirectoryMonitor:
 	directory = ''
 	interval = 0
@@ -16,16 +15,12 @@ class DirectoryMonitor:
 	def start(self):
 		self.loop = 1
 		while self.loop == 1:
+			# Polls the directory two times between interval
 			before = os.listdir(self.directory)
-
 			time.sleep(self.interval)
-
 			after = os.listdir(self.directory)
 
-			for file in before:
-				pass
-				#`print file
-
+			# Compares lists and passes file/folder names
 			removed = list(set(before) - set(after))
 			for file in removed:
 				if not self.on_removed == None:
@@ -38,20 +33,3 @@ class DirectoryMonitor:
 
 	def stop(self):
 		self.loop = 0
-
-this = DirectoryMonitor('C:\Users\Alex\Downloads',1)
-
-def ohman(thefile):
-	print 'Added: ' + thefile
-	this.stop()
-	this.directory = 'C:\\'
-	this.start()
-
-def ohman2(thefile):
-	print 'Removed: ' + thefile
-
-
-this.on_added = ohman
-this.on_removed = ohman2
-this.start()
-
