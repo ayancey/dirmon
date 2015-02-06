@@ -14,10 +14,10 @@ class DirectoryMonitor:
 		self.interval = interval
 
 	def start(self):
-		self.loop = 1
-		while self.loop == 1:
+		self.loop = True
+		while self.loop:
 			# Polls the directory twice for the first iteration
-			if self.before == None:
+			if not self.before:
 				self.before = os.listdir(self.directory)
 				time.sleep(self.interval)
 				
@@ -26,12 +26,12 @@ class DirectoryMonitor:
 			# Compares lists and passes file/folder names
 			removed = list(set(self.before) - set(after))
 			for file in removed:
-				if not self.on_removed == None:
+				if self.on_removed:
 					self.on_removed(file)
 
 			added = list(set(after) - set(self.before))
 			for file in added:
-				if not self.on_added == None:
+				if self.on_added:
 					self.on_added(file)
 
 			# Uses after output for the next before output
@@ -39,4 +39,4 @@ class DirectoryMonitor:
 			time.sleep(self.interval)
 
 	def stop(self):
-		self.loop = 0
+		self.loop = False
