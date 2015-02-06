@@ -4,13 +4,13 @@ from dirmon import DirectoryMonitor
 monitor = DirectoryMonitor(".", 5)
 
 def added(file):
-	print 'Added: ' + file
+	print('Added: ' + file)
 	if file == ".git":
-		print "Git initiated"
+		print("Git initiated")
 		monitor.stop()
 
 def removed(file):
-	print 'Removed: ' + file
+	print('Removed: ' + file)
 
 monitor.on_added = added
 monitor.on_removed = removed
