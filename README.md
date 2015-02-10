@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ayancey/dirmon.svg)](https://travis-ci.org/ayancey/dirmon)
 # dirmon
 Barebones cross-platform library for detecting files added and removed from a directory.
 
