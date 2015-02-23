@@ -23,13 +23,13 @@ class DirectoryMonitor:
 
 			# Compares lists and passes file/folder names
 			removed = list(set(before) - set(after))
-			for file in removed:
-				if self.on_removed:
+			if self.on_removed:
+				for file in removed:
 					self.on_removed(file)
 
 			added = list(set(after) - set(before))
-			for file in added:
-				if self.on_added:
+			if self.on_added:
+				for file in added:
 					self.on_added(file)
 
 			# Uses after output for the next before output
